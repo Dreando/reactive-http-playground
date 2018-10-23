@@ -20,7 +20,7 @@ class Channel(private val channelId: ChannelId,
     private val channelCounter = metricsBuilder.counter(channelId)
 
     private val channelProcessor: WorkQueueProcessor<Event> = WorkQueueProcessor.builder<Event>()
-            .bufferSize(256)
+            .bufferSize(4096)
             .share(true)
             .waitStrategy(WaitStrategy.parking())
             .autoCancel(false)

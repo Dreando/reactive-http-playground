@@ -43,7 +43,7 @@ class ChannelHandler(private val channelKeeper: ChannelKeeper) {
                     req.pathVariable(channelIdVariable),
                     req.pathVariable(accessTokenVariable).toAccessToken(),
                     req.bodyToMono(MapStateEvent::class.java))
-            ServerResponse.ok().build()
+            ServerResponse.ok().syncBody(PublishResponse(200))
         } catch (exception: Exception) {
             ServerResponse.badRequest().syncBody(exception.localizedMessage)
         }
