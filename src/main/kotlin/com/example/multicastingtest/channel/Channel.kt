@@ -1,5 +1,6 @@
 package com.example.multicastingtest.channel
 
+import com.example.multicastingtest.MetricsBuilder
 import com.example.multicastingtest.domain.Event
 import org.slf4j.LoggerFactory
 import reactor.core.publisher.Flux
@@ -10,7 +11,9 @@ import reactor.util.concurrent.WaitStrategy
 typealias ChannelId = String
 typealias SubscriberId = String
 
-class Channel(private val channelId: ChannelId, private val accessToken: AccessToken) {
+class Channel(private val channelId: ChannelId,
+              private val accessToken: AccessToken,
+              private val metricsBuilder: MetricsBuilder) {
 
     private val log = LoggerFactory.getLogger(Channel::class.java)
 

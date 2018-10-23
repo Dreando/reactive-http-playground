@@ -1,4 +1,4 @@
-package com.example.multicastingtest.domain
+package com.example.multicastingtest
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

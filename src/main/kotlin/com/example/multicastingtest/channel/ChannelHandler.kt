@@ -25,7 +25,7 @@ class ChannelHandler(private val channelKeeper: ChannelKeeper) {
     }
 
     fun getAllChannels(req: ServerRequest): Mono<ServerResponse> {
-        return ServerResponse.ok().syncBody(channelKeeper.getAllChannels())
+        return sse(channelKeeper.getAllChannels())
     }
 
     fun subscribe(req: ServerRequest): Mono<ServerResponse> {
