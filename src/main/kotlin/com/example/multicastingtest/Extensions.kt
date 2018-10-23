@@ -1,4 +1,4 @@
-package com.example.multicastingtest.app
+package com.example.multicastingtest
 
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToServerSentEvents

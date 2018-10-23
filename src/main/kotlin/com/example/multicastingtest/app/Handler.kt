@@ -1,5 +1,6 @@
 package com.example.multicastingtest.app
 
+import com.example.multicastingtest.sse
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
@@ -13,7 +14,7 @@ class Handler(private val stateContainer: StateContainer) {
     }
 
     fun pushEvent(serverRequest: ServerRequest): Mono<ServerResponse> {
-        stateContainer.push(serverRequest.bodyToMono(Event::class.java))
+        stateContainer.push(serverRequest.bodyToMono(MapStateEvent::class.java))
         return ServerResponse.ok().build()
     }
 
