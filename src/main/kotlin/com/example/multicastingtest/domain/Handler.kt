@@ -1,4 +1,4 @@
-package com.example.multicastingtest.app
+package com.example.multicastingtest.domain
 
 import com.example.multicastingtest.sse
 import org.springframework.stereotype.Component

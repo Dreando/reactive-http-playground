@@ -1,4 +1,4 @@
-package com.example.multicastingtest.app
+package com.example.multicastingtest.domain
 
 typealias Zoom = Double
 data class Point(val lat: Double, val lon: Double)
