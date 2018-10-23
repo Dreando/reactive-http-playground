@@ -13,9 +13,11 @@ typealias SubscriberId = String
 
 class Channel(private val channelId: ChannelId,
               private val accessToken: AccessToken,
-              private val metricsBuilder: MetricsBuilder) {
+              metricsBuilder: MetricsBuilder) {
 
     private val log = LoggerFactory.getLogger(Channel::class.java)
+
+    private val channelCounter = metricsBuilder.counter(channelId)
 
     private val channelProcessor: WorkQueueProcessor<Event> = WorkQueueProcessor.builder<Event>()
             .bufferSize(256)
@@ -28,15 +30,16 @@ class Channel(private val channelId: ChannelId,
 
     fun publish(event: Event, someAccessToken: AccessToken) {
         if (someAccessToken.matches(this.accessToken)) {
-            log.info("Broadcasting event {}")
             channelProcessor.onNext(event)
+            channelCounter.increment()
+            log.info("Publishing event '$event' on channel $channelId")
             return
         }
         throw IllegalStateException("Can't publish, wrong access token!")
     }
 
     fun subscribe(subscriberId: SubscriberId): Flux<Event> {
-        log.info("Subscribing $subscriberId")
+        log.info("Subscribing $subscriberId to channel $channelId")
         return subscription
     }
 
